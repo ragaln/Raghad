@@ -13,6 +13,9 @@ def index(request):
 def clubs(request):
     # This view returns the clubs list page for Qasim Sports Clubs
     return render(request, 'clubsmodule/clubList.html')
+def contactus(request):
+    # This view returns the contact us page 
+    return render(request, 'clubsmodule/contact.html')
 
 def club(request, cId):
     # This view returns the details of a specific club for Qasim Sports Clubs

@@ -6,6 +6,7 @@ from clubs import views
 
 urlpatterns = [    
     path('', views.index, name='index'),
-    path('clubs', views.clubs),
+    path('clubs/', views.clubs,name="clubs"),
+    path('contact/',views.contactus,name="contactus"),
     path('clubs/<int:cId>', views.club)
 ]
