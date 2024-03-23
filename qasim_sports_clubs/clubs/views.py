@@ -3,6 +3,12 @@ from django.shortcuts import redirect, render
 # Create your views here.
 # it is about qasim sports clubs
 
+def __getClubs():
+    return [
+        {'id': 1, 'name': 'Al-Qasim Football Club', 'sport': 'Football', 'location': 'Qasim Stadium', 'image': 'images/football.jpg'},
+        {'id': 2, 'name': 'Al-Qasim Tennis Club', 'sport': 'Tennis', 'location': 'Qasim Tennis Courts', 'image': 'images/tennis.jpg'},
+        {'id': 3, 'name': 'Al-Qasim Basketball Club', 'sport': 'Basketball', 'location': 'Qasim Sports Arena', 'image': 'images/basketball.jpg'}
+    ]
 
 
 
@@ -12,7 +18,9 @@ def index(request):
 
 def clubs(request):
     # This view returns the clubs list page for Qasim Sports Clubs
-    return render(request, 'clubsmodule/clubList.html')
+    all_clubs = __getClubs()
+    context = {'clubs': all_clubs}
+    return render(request, 'clubsmodule/clubList.html', context)
 def contactus(request):
     # This view returns the contact us page 
     return render(request, 'clubsmodule/contact.html')

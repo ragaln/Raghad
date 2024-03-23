@@ -4,19 +4,14 @@
 {% block content %}
 <h1>Qasim Sports Clubs - Club List</h1>
 <ul>
+    {% for club in clubs %}
     <li>
-        <h2>Football Club</h2>
-        <img src="{% static 'images/football.jpg' %}" alt="Football Club" style="width: 200px; height: auto;" />
-        <p>ID: 12344321</p>
-        <p>Location: Stadium A</p>
-        <a href="clubs/12344321">View details</a>
+        <h2>{{ club.name }} - {{ club.sport }}</h2>
+        <img src="{% static club.image %}" alt="{{ club.name }}" style="width: 200px; height: auto;" />
+        <p>ID: {{ club.id }}</p>
+        <p>Location: {{ club.location }}</p>
+        <a href="clubs/{{ club.id }}">View details</a>
     </li>
-    <li>
-        <h2>Tennis Club</h2>
-        <img src="{% static 'images/tennis_club.jpg' %}" alt="Tennis Club" style="width: 200px; height: auto;" />
-        <p>ID: 56788765</p>
-        <p>Location: Court B</p>
-        <a href="clubs/56788765">View details</a>
-    </li>
+    {% endfor %}
 </ul>
 {% endblock content %}
