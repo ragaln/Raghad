@@ -39,3 +39,19 @@ def club(request, cId):
     
     context = {'club':targetClub} # 'club' is the variable name accessible by the template
     return render(request, 'clubsmodule/club.html', context)
+
+def filter(request):
+    return render(request, 'clubsmodule/filter.html')
+
+def filter_clubs(request):
+    clubs = __getClubs()
+    name_query = request.GET.get('name', '')
+    sport_query = request.GET.get('sport', '')
+
+    if name_query:
+        clubs = [club for club in clubs if name_query.lower() in club['name'].lower()]
+    if sport_query:
+        clubs = [club for club in clubs if club['sport'] == sport_query]
+
+    context = {'clubs': clubs}
+    return render(request, 'clubsmodule/clubList.html', context)

@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .filter-form {
+        margin-bottom: 20px;
+    }
+    .filter-form input, .filter-form select {
+        padding: 5px;
+        margin-right: 10px;
+    }
+    .filter-form button {
+        padding: 5px 15px;
+    }
+</style>
+
+<h1>Filter Clubs</h1>
+<form action="{% url 'filter_clubs' %}" method="get" class="filter-form">
+    <input type="text" name="name" placeholder="Club Name">
+    <select name="sport">
+        <option value="">Select Sport</option>
+        <option value="Football">Football</option>
+        <option value="Tennis">Tennis</option>
+        <option value="Basketball">Basketball</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+{% endblock content %}
