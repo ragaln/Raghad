@@ -1,0 +1,52 @@
+[
+    {
+        "model": "clubs.sport",
+        "pk": 1,
+        "fields": {
+            "name": "Football"
+        }
+    },
+    {
+        "model": "clubs.sport",
+        "pk": 2,
+        "fields": {
+            "name": "Tennis"
+        }
+    },
+    {
+        "model": "clubs.sport",
+        "pk": 3,
+        "fields": {
+            "name": "Basketball"
+        }
+    }
+,
+
+    {
+        "model": "clubs.club",
+        "pk": 1,
+        "fields": {
+            "name": "Al-Qasim Football Club",
+            "location": "Qasim Stadium",
+            "sport": 1  
+        }
+    },
+    {
+        "model": "clubs.club",
+        "pk": 2,
+        "fields": {
+            "name": "Al-Qasim Tennis Club",
+            "location": "Qasim Tennis Courts",
+            "sport": 2 
+        }
+    },
+    {
+        "model": "clubs.club",
+        "pk": 3,
+        "fields": {
+            "name": "Al-Qasim Basketball Club",
+            "location": "Qasim Sports Arena",
+            "sport": 3  
+        }
+    }
+]
