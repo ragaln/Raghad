@@ -1,5 +1,6 @@
-from django.shortcuts import redirect, render
-from .models import Club, Sport
+from django.db.models import Q, Count
+from django.shortcuts import render, redirect
+from .models import Club
 
 def clubs(request):
     all_clubs = Club.objects.select_related('sport').all()
@@ -23,18 +24,23 @@ def contactus(request):
 def filter(request):
     return render(request, 'clubsmodule/filter.html')
 
+
+
 def filter_clubs(request):
     name_query = request.GET.get('name', '')
     sport_query = request.GET.get('sport', '')
+    order_query = request.GET.get('order', 'name')  # Assume we want to allow ordering
 
-    if name_query and sport_query:
-        clubs = Club.objects.filter(name__icontains=name_query, sport__name=sport_query)
-    elif name_query:
-        clubs = Club.objects.filter(name__icontains=name_query)
-    elif sport_query:
-        clubs = Club.objects.filter(sport__name=sport_query)
-    else:
-        clubs = Club.objects.all()
+    # Building the initial query with Q objects
+    query = Q()
+    if name_query:
+        query &= Q(name__icontains=name_query)
+    if sport_query:
+        query &= Q(sport__name=sport_query)
+    
+    clubs = Club.objects.filter(query).order_by(order_query)  # Ordering by the 'order' parameter
+
 
     context = {'clubs': clubs}
     return render(request, 'clubsmodule/clubList.html', context)
+

@@ -10,7 +10,7 @@
         <img src="{% static club.image %}" alt="{{ club.name }}" style="width: 200px; height: auto;" />
         <p>ID: {{ club.id }}</p>
         <p>Location: {{ club.location }}</p>
-        <a href="clubs/{{ club.id }}">View details</a>
+        <a href="./{{ club.id }}">View details</a>
     </li>
     {% endfor %}
 </ul>
