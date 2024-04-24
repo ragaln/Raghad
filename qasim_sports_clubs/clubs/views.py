@@ -2,7 +2,6 @@ from django.db.models import Q, Count
 from django.shortcuts import render, redirect
 from .models import Club, Sport
 from django.core.files.storage import default_storage
-from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -23,7 +22,7 @@ def add_club(request):
     return render(request, 'clubsmodule/clubForm.html', {
         'title': 'Add Club', 'button_text': 'Add', 'sports': sports
     })
-
+@csrf_exempt
 def update_club(request, cId):
     club = Club.objects.select_related('sport').get(id=cId)
     
@@ -38,7 +37,8 @@ def update_club(request, cId):
                 default_storage.delete(club.image.path)
             club.image.save(image.name, image)
         club.save()
-        return redirect('club_detail', cId=club.id)  # Redirect to the detail view of the updated club
+        context = {'club': club}
+        return render(request, 'clubsmodule/club.html', context)
     return render(request, 'clubsmodule/clubForm.html', {
         'club': club, 'title': 'Update Club', 'button_text': 'Update', 'sports': sports
     })
@@ -69,8 +69,7 @@ def filter(request):
 def filter_clubs(request):
     name_query = request.GET.get('name', '')
     sport_query = request.GET.get('sport', '')
-    order_query = request.GET.get('order', 'name')  # Assume we want to allow ordering
-
+    order_query = request.GET.get('order', 'name') 
     # Building the initial query with Q objects
     query = Q()
     if name_query:
@@ -78,7 +77,7 @@ def filter_clubs(request):
     if sport_query:
         query &= Q(sport__name=sport_query)
     
-    clubs = Club.objects.filter(query).order_by(order_query)  # Ordering by the 'order' parameter
+    clubs = Club.objects.filter(query).order_by(order_query) 
 
 
     context = {'clubs': clubs}

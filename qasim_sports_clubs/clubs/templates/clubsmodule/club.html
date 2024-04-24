@@ -1,10 +1,23 @@
 {% extends "layouts/base.html" %}
+{% load static %}
+
 {% block content %}
-<h1>Qasim sports clubs - Club details</h1>
-<h2> Club name :</h2>
-<p> {{ club.name }}</p>
-<h2> Club ID :</h2>
-<p> {{ club.id }}</p>
-<h2> Club Location :</h2>
-<p> {{ club.location }}</p>
+<div class="container club-details">
+    <h1>Qasim Sports Clubs - Club Details</h1>
+    <h2>Club Name:</h2>
+    <p>{{ club.name }}</p>
+    <h2>Club ID:</h2>
+    <p>{{ club.id }}</p>
+    <h2>Club Location:</h2>
+    <p>{{ club.location }}</p>
+    <!-- If there's an image field, display it -->
+    {% if club.image %}
+    <div class="club-image" >
+
+        <img src="{{ club.image.url }}" alt="{{ club.name }}" class="club-image" />
+    </div>
+    {% endif %}
+    <!-- Edit button -->
+    <a href="{% url 'edit_club' club.id %}" class="edit-button">Edit Club</a>
+</div>
 {% endblock content %}

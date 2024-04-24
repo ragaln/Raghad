@@ -2,17 +2,34 @@
 {% load static %}
 
 {% block content %}
-<h1>Qasim Sports Clubs - Club List</h1>
-<a href="./addClub">Add new Club</a>
-<ul>
-    {% for club in clubs %}
-    <li>
-        <h2>{{ club.name }} - {{ club.sport }}</h2>
-        <img src="{% static club.image %}" alt="{{ club.name }}" style="width: 200px; height: auto;" />
-        <p>ID: {{ club.id }}</p>
-        <p>Location: {{ club.location }}</p>
-        <a href="./{{ club.id }}">View details</a>
-    </li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <header>
+        <h1>Qasim Sports Clubs - Club List</h1>
+        <a href="{% url 'add_club' %}">Add new Club</a>
+    </header>
+    <ul>
+        {% for club in clubs %}
+        <li>
+            <div class="club-info">
+                {% if club.image %}
+                <img src="{{ club.image.url }}" alt="{{ club.name }}" />
+                {% endif %}
+                <div>
+                    <div class="club-details">
+                        <div>
+                            <h2>{{ club.name }}</h2>
+                            <p>{{ club.sport }}</p>
+                        </div>
+                        <div>
+                            <p>ID: {{ club.id }}</p>
+                            <p>Location: {{ club.location }}</p>
+                            <a href="./{{ club.id }}">View details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock content %}

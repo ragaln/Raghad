@@ -48,3 +48,188 @@ cursor: pointer;
 .contact-form button:hover {
 background: #555;
 }
+/* Add this inside a <style> tag in your base.html within the <head> section, or in an external CSS file. */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header a {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+.club-info {
+    display: flex;
+    align-items: center;
+}
+
+.club-info img {
+    flex-shrink: 0;
+    width: 150px;
+    height: 100px;
+    margin-right: 20px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.club-info > div {
+    flex-grow: 1;
+}
+.container {
+    max-width: 750px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.club-details {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.club-details h1, .club-details h2 {
+    margin: 0;
+    color: #333;
+    padding-bottom: 5px;
+}
+
+.club-details p {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0 10px;
+}
+
+.club-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    
+
+}
+.club-image img{
+    margin:auto;
+    display:block;
+    width:50%;
+}
+
+.edit-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    line-height: 1.5;
+}
+
+.form-group img {
+    max-width: 200px;
+    height: auto;
+    margin-top: 10px;
+}
+
+.form-group button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: #0056b3;
+}
+
+.edit-button {
+    display: block;
+    margin-top: 20px;
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.edit-button:hover {
+    background-color: #218838;
+}
+
