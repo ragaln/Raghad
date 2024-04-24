@@ -1,7 +1,47 @@
 from django.db.models import Q, Count
 from django.shortcuts import render, redirect
-from .models import Club
+from .models import Club, Sport
+from django.core.files.storage import default_storage
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
+def add_club(request):
+    sports = Sport.objects.all()
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        location = request.POST.get('location')
+        sport_id = request.POST.get('sport')
+        image = request.FILES.get('image')
+        sport = Sport.objects.get(id=sport_id)
+
+        club = Club(name=name, location=location, sport=sport)
+        if image:
+            club.image.save(image.name, image)
+        club.save()
+        return redirect('clubs')  # Redirect to the list of clubs view
+    return render(request, 'clubsmodule/clubForm.html', {
+        'title': 'Add Club', 'button_text': 'Add', 'sports': sports
+    })
+
+def update_club(request, cId):
+    club = Club.objects.select_related('sport').get(id=cId)
+    
+    sports = Sport.objects.all()
+    if request.method == 'POST':
+        club.name = request.POST.get('name')
+        club.location = request.POST.get('location')
+        club.sport_id = request.POST.get('sport')
+        image = request.FILES.get('image')
+        if image:
+            if club.image:
+                default_storage.delete(club.image.path)
+            club.image.save(image.name, image)
+        club.save()
+        return redirect('club_detail', cId=club.id)  # Redirect to the detail view of the updated club
+    return render(request, 'clubsmodule/clubForm.html', {
+        'club': club, 'title': 'Update Club', 'button_text': 'Update', 'sports': sports
+    })
 def clubs(request):
     all_clubs = Club.objects.select_related('sport').all()
     context = {'clubs': all_clubs}
