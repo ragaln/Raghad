@@ -8,34 +8,8 @@
     <h3>{{ title }}</h3>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-group">
-            <label for="name">Club Name:</label>
-            <input type="text" id="name" name="name" value="{{ club.name|default_if_none:'' }}" required />
-        </div>
-        <div class="form-group">
-            <label for="location">Location:</label>
-            <input type="text" id="location" name="location" value="{{ club.location|default_if_none:'' }}" required />
-        </div>
-        <div class="form-group">
-            <label for="sport">Sport:</label>
-            <select id="sport" name="sport" required>
-                {% for sport in sports %}
-                <option value="{{ sport.id }}" {% if club.sport_id == sport.id %}selected{% endif %}>
-                    {{ sport.name }}
-                </option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" />
-            {% if club.image %}
-                <img src="{{ club.image.url }}" alt="Current Image" />
-            {% endif %}
-        </div>
-        <button class="edit-button" type="submit">{{ button_text }}</button>
-        {% if club.id %}
-        {% endif %}
+        {{ form.as_p }} 
+        <button type="submit" class="btn btn-primary">{{ button_text }}</button>
     </form>
 </div>
 {% endblock content %}
