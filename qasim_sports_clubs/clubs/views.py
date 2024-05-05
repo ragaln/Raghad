@@ -7,7 +7,6 @@ from django.core.files.storage import default_storage
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-@csrf_exempt
 def add_club(request):
     if request.method == 'POST':
         form = ClubForm(request.POST, request.FILES)
@@ -21,23 +20,19 @@ def add_club(request):
     })
 @csrf_exempt
 def update_club(request, cId):
-    club = Club.objects.select_related('sport').get(id=cId)
-    
-    sports = Sport.objects.all()
+    club = Club.objects.get(id=cId)
     if request.method == 'POST':
-        club.name = request.POST.get('name')
-        club.location = request.POST.get('location')
-        club.sport_id = request.POST.get('sport')
-        image = request.FILES.get('image')
-        if image:
-            if club.image:
-                default_storage.delete(club.image.path)
-            club.image.save(image.name, image)
-        club.save()
-        context = {'club': club}
-        return render(request, 'clubsmodule/club.html', context)
+        form = ClubForm(request.POST, request.FILES, instance=club)
+        if form.is_valid():
+            if 'image' in request.FILES:
+                if club.image:
+                    default_storage.delete(club.image.path)
+            form.save()
+            return redirect('club_details', cId=club.id)
+    else:
+        form = ClubForm(instance=club)
     return render(request, 'clubsmodule/clubForm.html', {
-        'club': club, 'title': 'Update Club', 'button_text': 'Update', 'sports': sports
+        'club': club, 'title': 'Update Club', 'button_text': 'Update', 'form': form
     })
 def clubs(request):
     all_clubs = Club.objects.select_related('sport').all()
