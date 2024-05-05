@@ -13,5 +13,6 @@ urlpatterns = [
     path('clubs/addClub',views.add_club,name="add_club"),
     path('clubs/edit_club/<int:cId>',views.update_club,name="edit_club"),
     path('filter_clubs/', views.filter_clubs, name='filter_clubs'),
+    path('delete_club/<int:cId>', views.delete_club, name='delete_club'),
 
 ]

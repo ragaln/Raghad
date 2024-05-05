@@ -34,6 +34,16 @@ def update_club(request, cId):
     return render(request, 'clubsmodule/clubForm.html', {
         'club': club, 'title': 'Update Club', 'button_text': 'Update', 'form': form
     })
+
+@csrf_exempt
+def delete_club(request, cId):
+    print(cId)
+    club = Club.objects.get(id=cId)
+    if request.method == 'POST':
+        club.delete()
+    all_clubs = Club.objects.select_related('sport').all()
+    context = {'clubs': all_clubs}
+    return render(request, 'clubsmodule/clubList.html', context)
 def clubs(request):
     all_clubs = Club.objects.select_related('sport').all()
     context = {'clubs': all_clubs}
